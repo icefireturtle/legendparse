@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <Title>Legend Parse</Title>
+    </head>
+    <body>
+        <h2>Messages</h2>
+        <br />
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>Message</th>
+                <th>Date Created</th>
+            </thead>
+            {% for data in messages %}
+            <tbody>
+                <td>{{data.id}}</td>
+                <td>{{data.message}}</td>
+                <td>{{data.date_created}}</td>
+                <td><a href="/delete/{{data.id}}" type="button">Delete</a></td>
+            </tbody>
+            {% endfor %}
+        </table>
+    </body>
+</html>

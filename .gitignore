@@ -1,0 +1,7 @@
+instance/
+.webassets-cache/
+__pycache__/
+*.py[cod]
+env/
+.venv/
+*.egg-info/
