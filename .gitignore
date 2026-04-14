@@ -1,7 +1,28 @@
+# Python
 instance/
 .webassets-cache/
 __pycache__/
 *.py[cod]
+*.egg-info/
+*.egg
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Env
 env/
 .venv/
-*.egg-info/
+bin/
+lib/
+
+#PyInstaller
+dist/
+build/
+*.spec
+dist/**
+
+#Swap File
+*.swp
+.DS_Store
