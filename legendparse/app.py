@@ -48,6 +48,23 @@ def delete_message(id):
     db.session.commit()
     return redirect('/')
 
+@app.route('/update/<int:id>')
+def message_update(id):
+    message_id = Message.query.get_or_404(id)
+    message = message_id.message
+    return render_template('update.html', message=message_id.message, id=message_id.id)
+
+@app.route('/update/<int:id>', methods=["POST"])
+def update_message(id):
+    new_message = request.form.get("message")
+    
+    if new_message is not None:
+        db.session.bulk_update_mappings(Message, [{'id': id, 'message': new_message}])
+        db.session.commit()
+        return redirect('/')
+    else:
+        return redirect('/')
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
