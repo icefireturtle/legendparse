@@ -40,6 +40,13 @@ def message():
         return redirect('/')
     else:
         return redirect('/')
+    
+@app.route('/delete/<int:id>')
+def delete_message(id):
+    message = Message.query.get_or_404(id)
+    db.session.delete(message)
+    db.session.commit()
+    return redirect('/')
 
 if __name__ == '__main__':
     with app.app_context():
