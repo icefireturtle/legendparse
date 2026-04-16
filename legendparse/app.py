@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
+from slice import slicer
 app = Flask(__name__)
 
 #database items
@@ -43,6 +44,12 @@ def message():
         return redirect('/')
     else:
         return redirect('/')
+    
+@app.route('/slicer/<int:id>')
+def sliced(id):
+    message = Message.query.get_or_404(id)
+    slice = slicer(message.message)
+    return render_template('slicer.html', message=message, slice=slice)
     
 @app.route('/delete/<int:id>')
 def delete_message(id):
