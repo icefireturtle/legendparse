@@ -26,3 +26,6 @@ dist/**
 #Swap File
 *.swp
 .DS_Store
+legendparse/migrations/env.py
+legendparse/migrations/README
+legendparse/migrations/alembic.ini
