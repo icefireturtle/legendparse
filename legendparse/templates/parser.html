@@ -39,11 +39,10 @@
             event.preventDefault();
             elementCount+=1;
 
-            var paramsContainer = document.getElementById('paramsContainer');
-            var newParamsWrapper = document.createElement('div');
-            newParamsWrapper.classList.add('paramsWrapper');
+            const paramsContainer = document.getElementById('paramsContainer');
+            const wrapper = document.createElement('div');
+            wrapper.className = 'paramsWrapper';
 
-            
             var newLabel = document.createElement('label');
             var newField = document.createElement('input');
             
@@ -52,9 +51,8 @@
             newField.placeholder = 'Parameter Field ' + (elementCount + 1);
             newField.id = 'params' + (elementCount + 1);
 
-            paramsContainer.append(newLabel);
-            paramsContainer.appendChild(newField);
-            
+            wrapper.append(newLabel);
+            wrapper.appendChild(newField);
 
             var removeButton = document.createElement('button');
             removeButton.textContent = 'Remove';
@@ -62,10 +60,12 @@
             removeButton.addEventListener('click', function(event) {
                 event.preventDefault();
                 event.currentTarget.parentElement.remove();
+                console.log(event.currentTarget.parentElement, event.currentTarget.closest('.paramsWrapper'));
+                elementCount-=1;
             });
 
-            newParamsWrapper.appendChild(removeButton);
-            paramsContainer.appendChild(newParamsWrapper);
+            wrapper.appendChild(removeButton);
+            paramsContainer.appendChild(wrapper);
         });
         </script>
     </body>
