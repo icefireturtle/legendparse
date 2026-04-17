@@ -3,11 +3,26 @@
         <title>Update Message</title>
     </head>
     <body>
-        <h2>Update Message</h2>
-        <form action="/update/{{id}}" method="POST">
-            <label>Update Message {{id}}:</label>
-            <input type="textarea" name="message" value="{{message}}">
-            <button type="submit">Update</button>
-        </form>
+        <div align="center">
+            <div align="center">
+                <h2>Navigation</h2>
+                <nav>
+                    <a href="/">Home</a>
+                </nav>
+            </div>
+            <div align="center">
+                <h2>Update Message</h2>
+                <form action="/update/{{id}}" method="POST">
+                    <h3>Update Message {{id}}</h3>
+                    <br />
+                    <label>Record Type:</label>
+                    <input type="textarea" name="record_type" value="{{record_type}}" maxlength=5>
+                    <br />
+                    <label>Message:</label>
+                    <input type="textarea" name="message" value="{{message}}">
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
