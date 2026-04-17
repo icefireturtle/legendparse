@@ -3,14 +3,17 @@
         <Title>Legend Parse</Title>
     </head>
     <body>
-        <h2>Messages</h2>
+        <div align="center">
+            <h2><a href="/parser">Message and Parser Parameters</a></h2>
         <br />
+            <h2>Stored Messages</h2>
         <table>
             <thead>
                 <th>ID</th>
                 <th>Message</th>
                 <th>Date Created</th>
                 <th>Last Updated</th>
+                <th>Actions</th>
             </thead>
             {% for data in messages %}
             <tbody>
@@ -18,10 +21,12 @@
                 <td>{{data.message}}</td>
                 <td>{{data.date_created}}</td>
                 <td>{{data.last_updated}}</td>
+                <td><a href="/slicer/{{data.id}}"><button type="button">Slice</button></a></td>
                 <td><a href="/update/{{data.id}}"><button type="button">Update</button></a></td>
                 <td><a href="/delete/{{data.id}}"><button type="button">Delete</button></a></td>
             </tbody>
             {% endfor %}
         </table>
+        </div>
     </body>
 </html>

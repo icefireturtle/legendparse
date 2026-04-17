@@ -3,11 +3,70 @@
         <title>Parser</title>
     </head>
     <body>
-        <h2>Parser Form</h2>
-        <form action="/parser" method="POST">
-            <label>Message</label>
-            <input type="textarea" name="message" placeholder="Insert message here...">
-            <button type="submit">Parse</button>
-        </form>
+        <div align="center">
+            <h2>Add Message</h2> 
+            <form action="/add" method="POST">
+                <table>
+                    <thead>
+                        <th>Record Type</th>
+                        <th>Message</th>
+                    </thead>
+                    <tbody>
+                        <td><input type="text" name="recordType" placeholder="Identifier here max 5 characters" maxlength="5"></td>
+                        <td><input type="textarea" name="message" placeholder="Insert message here..."></td>
+                        <td><button type="submit">Add</button></td>
+                    </tbody>
+                </table>
+            </form>
+                <br />
+            <h2>Create Parser Parameters for Message Record</h2>
+            <form action="/params" method="POST" id="parameters">
+                <div id="paramsContainer">
+                    <div class="paramsWrapper">
+                        <label>Parameter 1 Length:</label>
+                        <input type="text" id="params1" placeholder="Parameter Field 1">
+                        <button class=""removeField">Remove</button>
+                    </div>
+                </div>
+                <button id="addField">Add Field</button>
+                <button type="submit">Create Message Parameters</button>
+            </form>
+        </div>
+        <script>
+            let elementCount = 0;
+
+            document.getElementById('addField').addEventListener('click', function(event){
+            event.preventDefault();
+            elementCount+=1;
+
+            var paramsContainer = document.getElementById('paramsContainer');
+            var newParamsWrapper = document.createElement('div');
+            newParamsWrapper.classList.add('paramsWrapper');
+
+            
+            var newLabel = document.createElement('label');
+            var newField = document.createElement('input');
+            
+            newLabel.textContent = 'Parameter ' + (elementCount + 1) + ' Length: ';
+            newField.type = 'text';
+            newField.placeholder = 'Parameter Field ' + (elementCount + 1);
+            newField.id = 'params' + (elementCount + 1);
+
+            paramsContainer.append(newLabel);
+            paramsContainer.appendChild(newField);
+            
+
+            var removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.classList.add('removeField');
+            removeButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                event.currentTarget.parentElement.remove();
+            });
+
+            newParamsWrapper.appendChild(removeButton);
+            paramsContainer.appendChild(newParamsWrapper);
+        });
+        </script>
     </body>
 </html>
