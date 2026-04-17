@@ -10,6 +10,7 @@
         <table>
             <thead>
                 <th>ID</th>
+                <th>Record Type</th>
                 <th>Message</th>
                 <th>Date Created</th>
                 <th>Last Updated</th>
@@ -18,6 +19,7 @@
             {% for data in messages %}
             <tbody>
                 <td>{{data.id}}</td>
+                <td>{{data.record_type}}</td>
                 <td>{{data.message}}</td>
                 <td>{{data.date_created}}</td>
                 <td>{{data.last_updated}}</td>

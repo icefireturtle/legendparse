@@ -13,15 +13,25 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
-#orm class
+#orm classes
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    record_type = db.Column(db.String(5))
     message = db.Column(db.String(300), unique=False, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.now())
     last_updated = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
-        return f"Message: {self.message}, Date Created: {self.date_created}, Last Updated: {self.last_updated}"
+        return f"Message: {self.message}, Record Type: {self.record_type}, Date Created: {self.date_created}, Last Updated: {self.last_updated}"
+    
+class Record(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    record_type = db.Column(db.String(5), unique=True)
+    parameter_field_name_1 = db.Column(db.String(25))
+    parameter_field_length_1 = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f"Record Type: {self.record_type}, Parameter 1: {self.parameter_field_name_1}, Parameter 1 Length: {self.parameter_field_length_1}"
     
 #render functions
 @app.route('/')
@@ -33,18 +43,31 @@ def index():
 def parser():
     return render_template('parser.html')
 
-@app.route('/parser', methods=["POST"])
+@app.route('/add_message', methods=["POST"])
 def message():
     message = request.form.get("message")
+    record_type = request.form.get("recordType")
 
-    if message is not None:
-        m = Message(message=message)
+    if message is not None and record_type is not None:
+        m = Message(record_type=record_type, message=message)
         db.session.add(m)
         db.session.commit()
         return redirect('/')
     else:
         return redirect('/')
-    
+
+@app.route('/add_record', methods=["POST"])
+def record():
+    record = request.form.get("record")
+
+    if record is not None:
+        r = Record(record=record)
+        db.session.add(r)
+        db.session.commit()
+        return redirect('/')
+    else:
+        return redirect('/')
+
 @app.route('/slicer/<int:id>')
 def sliced(id):
     message = Message.query.get_or_404(id)
