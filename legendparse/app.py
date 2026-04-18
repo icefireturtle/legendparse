@@ -15,8 +15,10 @@ migrate = Migrate(app, db)
 
 #orm classes
 class Message(db.Model):
+    __tablename__ = "messages"
+    
     id = db.Column(db.Integer, primary_key=True)
-    record_type = db.Column(db.String(5))
+    record_type = db.Column(db.String(5), db.ForeignKey('records.record_type', name='fk_record_record_type'))
     message = db.Column(db.String(300), unique=False, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.now())
     last_updated = db.Column(db.DateTime, default=datetime.now())
@@ -25,10 +27,11 @@ class Message(db.Model):
         return f"Message: {self.message}, Record Type: {self.record_type}, Date Created: {self.date_created}, Last Updated: {self.last_updated}"
     
 class Record(db.Model):
+    __tablename__ = "records"
     id = db.Column(db.Integer, primary_key=True)
     record_type = db.Column(db.String(5), unique=True)
-    parameter_field_name_1 = db.Column(db.String(25))
-    parameter_field_length_1 = db.Column(db.Integer)
+    parameter_field_name = db.Column(db.String(25))
+    parameter_field_length = db.Column(db.Integer)
 
     def __repr__(self):
         return f"Record Type: {self.record_type}, Parameter 1: {self.parameter_field_name_1}, Parameter 1 Length: {self.parameter_field_length_1}"
