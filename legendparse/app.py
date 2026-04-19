@@ -28,13 +28,15 @@ class Message(db.Model):
     
 class Record(db.Model):
     __tablename__ = "records"
-    id = db.Column(db.Integer, primary_key=True)
-    record_type = db.Column(db.String(5), unique=True)
-    parameter_field_name = db.Column(db.String(25))
-    parameter_field_length = db.Column(db.Integer)
+    
+    record_type = db.Column(db.String(5), primary_key=True)
+    field_id = db.Column(db.Integer, primary_key=True)
+    field_name = db.Column(db.String(25))
+    field_description = db.Column(db.String(75))
+    field_length = db.Column(db.Integer)
 
     def __repr__(self):
-        return f"Record Type: {self.record_type}, Parameter 1: {self.parameter_field_name_1}, Parameter 1 Length: {self.parameter_field_length_1}"
+        return f"Record Type: {self.record_type}, Field: {self.field_name}, Field Length: {self.field_length}"
     
 #render functions
 @app.route('/')
