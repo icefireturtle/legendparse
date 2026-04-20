@@ -42,7 +42,8 @@ class Record(db.Model):
 @app.route('/')
 def index():
     messages = Message.query.all()
-    return render_template('index.html', messages=messages)
+    records = Record.query.all()
+    return render_template('index.html', messages=messages, records=records)
 
 @app.route('/parser')
 def parser():
@@ -64,10 +65,22 @@ def message():
 @app.route('/add_record', methods=["POST"])
 def record():
     record_type = request.form.get("recordType")
+    field_name = request.form.getlist("fieldName")
+    field_description = request.form.getlist("fieldDesc")
+    field_length = request.form.getlist("fieldLength")
 
-    if record_type is not None:
-        r = Record(record=record)
-        db.session.add(r)
+    if record_type is not None and field_name is not None and field_length is not None:
+        if len(field_name) > 1:
+            for i in range(len(field_name)):
+                field_id = i + 1
+                n = field_name[i]
+                d = field_description[i]
+                l = field_length[i]
+                r = Record(record_type=record_type, field_id=field_id, field_name=n, field_description=d, field_length=l)
+                db.session.add(r)
+        else:
+            r = Record(record_type=record_type, field_id=1, field_name=field_name[0], field_description=field_description[0], field_length=field_length[0])
+            db.session.add(r)
         db.session.commit()
         return redirect('/')
     else:

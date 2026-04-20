@@ -29,6 +29,29 @@
             </tbody>
             {% endfor %}
         </table>
+        <br />
+            <h2>Records</h2>
+        <table>
+            <thead>
+                <th>Record Type</th>
+                <th>Field ID</th>
+                <th>Field Name</th>
+                <th>Field Description</th>
+                <th>Field Length</th>
+                <th>Actions</th>
+            </thead>
+            {% for data in records %}
+            <tbody>
+                <td>{{data.record_type}}</td>
+                <td>{{data.field_id}}</td>
+                <td>{{data.field_name}}</td>
+                <td>{{data.field_description}}</td>
+                <td>{{data.field_length}}</td>
+                <td><a href="/update/{{data.id}}"><button type="button">Update</button></a></td>
+                <td><a href="/delete/{{data.id}}"><button type="button">Delete</button></a></td>
+            </tbody>
+            {% endfor %}
+        </table>
         </div>
     </body>
 </html>
