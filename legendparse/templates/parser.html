@@ -39,26 +39,26 @@
                         </tbody>
                     </table>
                     <br />
-                    <div id="paramsContainer">
-                        <div class="paramsWrapper">
-                            <table>
-                            <thead>
-                                <th>Field Name</th>
-                                <th>Field Length</th>
-                                <th>Field Description</th>
-                            </thead>
-                            <tbody>
-                            <tr>
-                            <td><input type="text" id="params1" placeholder="Field Name" required></td>
-                            <td><input type="text" id="params2" placeholder="String Length" required></td>
-                            <td><input type="text" id="params3" placeholder="Description"></td>
-                            <td><button class="removeField">Remove</button></td>
+                        <table id="paramsContainer">
+                        <thead>
+                            <th>Field Name</th>
+                            <th>Field Length</th>
+                            <th>Field Description</th>
+                        </thead>
+                        <tbody>
+                            <tr class="paramsWrapper">
+                                <td><input type="text" id="fieldName1" placeholder="Field Name" required></td>
+                                <td><input type="text" id="fieldLength1" placeholder="String Length" required></td>
+                                <td><input type="text" id="fieldDesc1" placeholder="Description"></td>
+                                <td><button class="removeField">Remove</button></td>
                             </tr>
-                            </div>
-                        </div>
-                                <tr><td rowspan="3" colspan="3" style="vertical-align: middle;" align="center"><button id="addField">Add Field</button>
-                                <button type="submit">Create Message Parameters</button></td></tr>
-                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td rowspan="3" colspan="3" style="vertical-align: middle;" align="center"><button id="addFields">Add Field</button>
+                                    <button type="submit">Create Message Parameters</button></td>
+                                </tr>
+                            </tfoot>
+                        </tbody>
                         </table>
                     </div>
                 </form>
@@ -66,24 +66,41 @@
         <script>
             let elementCount = 0;
 
-            document.getElementById('addField').addEventListener('click', function(event){
+            document.getElementById('addFields').addEventListener('click', function(event){
             event.preventDefault();
             elementCount+=1;
 
             const paramsContainer = document.getElementById('paramsContainer');
-            const wrapper = document.createElement('div');
-            wrapper.className = 'paramsWrapper';
+            const wrapper = document.createElement('tr');
+            wrapper.className = 'paramsWrapper'; 
 
-            var newLabel = document.createElement('label');
-            var newField = document.createElement('input');
+            var newFieldNameCell = document.createElement('td');
+            var newFieldLengthCell = document.createElement('td');
+            var newFieldDescCell = document.createElement('td');
+
+            var newFieldNameInput = document.createElement('input');
+            var newFieldLengthInput = document.createElement('input');
+            var newFieldDescInput = document.createElement('input');
             
-            newLabel.textContent = 'Parameter ' + (elementCount + 1) + ' Length: ';
-            newField.type = 'text';
-            newField.placeholder = 'Parameter Field ' + (elementCount + 1);
-            newField.id = 'params' + (elementCount + 1);
+            newFieldNameInput.type = 'text';
+            newFieldNameInput.placeholder = 'Field Name ' + (elementCount + 1);
+            newFieldNameInput.id = 'fieldName' + (elementCount + 1);
 
-            wrapper.append(newLabel);
-            wrapper.appendChild(newField);
+            newFieldLengthInput.type = 'text';
+            newFieldLengthInput.placeholder = 'Field Length ' + (elementCount + 1);
+            newFieldLengthInput.id = 'fieldLength' + (elementCount + 1);
+
+            newFieldDescInput.type = 'text';
+            newFieldDescInput.placeholder = 'Field Description ' + (elementCount + 1);
+            newFieldDescInput.id = 'fieldDesc' + (elementCount + 1);
+
+            wrapper.append(newFieldNameCell);
+            wrapper.append(newFieldLengthCell);
+            wrapper.append(newFieldDescCell);
+            
+            newFieldNameCell.appendChild(newFieldNameInput);
+            newFieldLengthCell.appendChild(newFieldLengthInput);
+            newFieldDescCell.appendChild(newFieldDescInput);
 
             var removeButton = document.createElement('button');
             removeButton.textContent = 'Remove';
