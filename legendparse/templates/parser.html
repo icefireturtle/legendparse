@@ -28,29 +28,41 @@
                     <br />
                 <h2>Create Parser Parameters for Message Record</h2>
                 <form action="/add_record" method="POST" id="parameters">
-                    <label>Record Type:</label>
-                    <input type="text" name="recordType" placeholder="Identifier here max 5 characters" maxlength="5"> 
-                    <br /><br />
+                    <table>
+                        <thead>
+                            <th>Record Type</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" name="recordType" placeholder="Identifier here max 5 characters" maxlength="5"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
                     <div id="paramsContainer">
                         <div class="paramsWrapper">
-                            <label>Field Name: </label>
-                            <input type="text" id="params1" placeholder="Field Name" required>
-                            <br /><br />
-                            <label>Field Length: </label>
-                            <input type="text" id="params2" placeholder="String Length" required>
-                            <br /><br />
-                            <label>Field Description: </label>
-                            <input type="text" id="params3" placeholder="Description">
-                            <br /><br />
-                            <button class="removeField">Remove</button>
+                            <table>
+                            <thead>
+                                <th>Field Name</th>
+                                <th>Field Length</th>
+                                <th>Field Description</th>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td><input type="text" id="params1" placeholder="Field Name" required></td>
+                            <td><input type="text" id="params2" placeholder="String Length" required></td>
+                            <td><input type="text" id="params3" placeholder="Description"></td>
+                            <td><button class="removeField">Remove</button></td>
+                            </tr>
+                            </div>
                         </div>
+                                <tr><td rowspan="3" colspan="3" style="vertical-align: middle;" align="center"><button id="addField">Add Field</button>
+                                <button type="submit">Create Message Parameters</button></td></tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <br /><br />
-                    <button id="addField">Add Field</button>
-                    <button type="submit">Create Message Parameters</button>
                 </form>
             </div>
-        </div>
         <script>
             let elementCount = 0;
 
