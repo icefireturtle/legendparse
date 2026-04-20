@@ -63,9 +63,9 @@ def message():
 
 @app.route('/add_record', methods=["POST"])
 def record():
-    record = request.form.get("record")
+    record_type = request.form.get("recordType")
 
-    if record is not None:
+    if record_type is not None:
         r = Record(record=record)
         db.session.add(r)
         db.session.commit()
