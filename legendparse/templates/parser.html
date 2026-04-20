@@ -47,9 +47,9 @@
                         </thead>
                         <tbody>
                             <tr class="paramsWrapper">
-                                <td><input type="text" name="fieldName1" id="fieldName1" placeholder="Field Name" required></td>
-                                <td><input type="text" name="fieldLength1" id="fieldLength1" placeholder="String Length" required></td>
-                                <td><input type="text" name="fieldDesc1" id="fieldDesc1" placeholder="Description"></td>
+                                <td><input type="text" name="fieldName" id="fieldName1" placeholder="Field Name" required></td>
+                                <td><input type="text" name="fieldLength" id="fieldLength1" placeholder="String Length" required></td>
+                                <td><input type="text" name="fieldDesc" id="fieldDesc1" placeholder="Description"></td>
                                 <td><button class="removeField">Remove</button></td>
                             </tr>
                             <tfoot>
@@ -83,17 +83,17 @@
             var newFieldDescInput = document.createElement('input');
             
             newFieldNameInput.type = 'text';
-            newFieldNameInput.name = 'fieldName' + (elementCount + 1);
+            newFieldNameInput.name = 'fieldName';
             newFieldNameInput.id = 'fieldName' + (elementCount + 1);
             newFieldNameInput.placeholder = 'Field Name ' + (elementCount + 1);
 
             newFieldLengthInput.type = 'text';
-            newFieldLengthInput.name = 'fieldLength' + (elementCount + 1);
+            newFieldLengthInput.name = 'fieldLength';
             newFieldLengthInput.id = 'fieldLength' + (elementCount + 1);
             newFieldLengthInput.placeholder = 'Field Length ' + (elementCount + 1);
 
             newFieldDescInput.type = 'text';
-            newFieldDescInput.name = 'fieldDesc' + (elementCount + 1);
+            newFieldDescInput.name = 'fieldDesc';
             newFieldDescInput.id = 'fieldDesc' + (elementCount + 1);
             newFieldDescInput.placeholder = 'Field Description ' + (elementCount + 1);
 
