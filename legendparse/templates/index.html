@@ -15,10 +15,11 @@
                 <th>Message</th>
                 <th>Date Created</th>
                 <th>Last Updated</th>
-                <th>Actions</th>
+                <th colspan="3">Actions</th>
             </thead>
-            {% for data in messages %}
             <tbody>
+            {% for data in messages %}
+                <tr>
                 <td>{{data.id}}</td>
                 <td>{{data.record_type}}</td>
                 <td>{{data.message}}</td>
@@ -27,8 +28,9 @@
                 <td><a href="/slicer/{{data.id}}"><button type="button">Slice</button></a></td>
                 <td><a href="/update/{{data.id}}"><button type="button">Update</button></a></td>
                 <td><a href="/delete/{{data.id}}"><button type="button">Delete</button></a></td>
-            </tbody>
+                </tr>
             {% endfor %}
+            </tbody>
         </table>
         <br />
             <h2>Records</h2>
@@ -39,10 +41,11 @@
                 <th>Field Name</th>
                 <th>Field Description</th>
                 <th>Field Length</th>
-                <th>Actions</th>
+                <th colspan="2">Actions</th>
             </thead>
-            {% for data in records %}
             <tbody>
+            {% for data in records %}
+                <tr>
                 <td>{{data.record_type}}</td>
                 <td>{{data.field_id}}</td>
                 <td>{{data.field_name}}</td>
@@ -50,8 +53,9 @@
                 <td>{{data.field_length}}</td>
                 <td><a href="/update/{{data.id}}"><button type="button">Update</button></a></td>
                 <td><a href="/delete/{{data.id}}"><button type="button">Delete</button></a></td>
-            </tbody>
+                </tr>
             {% endfor %}
+            </tbody>
         </table>
         </div>
     </body>

@@ -17,7 +17,7 @@
                     <table>
                         <thead>
                             <th>Record Type</th>
-                            <th>Message</th>
+                            <th colspan="2">Message</th>
                         </thead>
                         <tbody>
                             <td><select id="mRecordType" name="mRecordType">
@@ -48,7 +48,7 @@
                         <thead>
                             <th>Field Name</th>
                             <th>Field Length</th>
-                            <th>Field Description</th>
+                            <th colspan="2">Field Description</th>
                         </thead>
                         <tbody>
                             <tr class="paramsWrapper">
@@ -57,13 +57,13 @@
                                 <td><input type="text" name="fieldDesc" id="fieldDesc1" placeholder="Description"></td>
                                 <td><button class="removeField">Remove</button></td>
                             </tr>
+                            </tbody>
                             <tfoot>
                                 <tr>
                                     <td rowspan="3" colspan="3" style="vertical-align: middle;" align="center"><button id="addFields">Add Field</button>
                                     <button type="submit">Create Message Parameters</button></td>
                                 </tr>
                             </tfoot>
-                        </tbody>
                         </table>
                     </div>
                 </form>

@@ -6,12 +6,25 @@ h2 {
     color: #FFFFFF;
 }
 
+table {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #E8FBFF;
+    border-collapse: collapse;
+}
+
 th {
-    color: #FFFFFF;
+    color: #FFF8EE;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #E8FBFF;
 }
 
 td {
-    color: #F2F2EF;
+    color: #FFF8EE;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #E8FBFF;
 }
 
 a {
