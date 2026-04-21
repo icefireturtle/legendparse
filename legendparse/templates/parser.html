@@ -19,7 +19,11 @@
                             <th>Message</th>
                         </thead>
                         <tbody>
-                            <td><input type="text" name="recordType" placeholder="Identifier here max 5 characters" maxlength="5"></td>
+                            <td><select id="mRecordType" name="mRecordType">
+                                {% for data in record_types %}
+                                <option>{{data.record_type}}</option>
+                                {% endfor %}
+                            </select></td>
                             <td><input type="textarea" name="message" placeholder="Insert message here..."></td>
                             <td><button type="submit">Add</button></td>
                         </tbody>

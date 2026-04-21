@@ -47,12 +47,13 @@ def index():
 
 @app.route('/parser')
 def parser():
-    return render_template('parser.html')
+    record_types = Record.query.with_entities(Record.record_type).distinct()
+    return render_template('parser.html', record_types=record_types)
 
 @app.route('/add_message', methods=["POST"])
 def message():
     message = request.form.get("message")
-    record_type = request.form.get("recordType")
+    record_type = request.form.get("mRecordType")
 
     if message is not None and record_type is not None:
         m = Message(record_type=record_type, message=message)
