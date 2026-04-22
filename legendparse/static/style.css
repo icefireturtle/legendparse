@@ -19,6 +19,7 @@ table {
     border-style: solid;
     border-color: #E8FBFF;
     border-collapse: collapse;
+    
 }
 
 th {
@@ -37,6 +38,8 @@ td {
     border-color: #E8FBFF;
     text-align: center;
     text-wrap: pretty;
+    word-wrap: break-word;
+    max-width: 350px;
 }
 
 td.message {
@@ -49,4 +52,9 @@ td.time {
 
 a {
     color: lightgreen;
+}
+
+button {
+    height: 100%;
+    width: 100%
 }
