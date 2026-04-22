@@ -26,6 +26,8 @@ th {
     border-width: 1px;
     border-style: solid;
     border-color: #E8FBFF;
+    text-align: center;
+    padding: 5px;
 }
 
 td {
@@ -33,6 +35,16 @@ td {
     border-width: 1px;
     border-style: solid;
     border-color: #E8FBFF;
+    text-align: center;
+    text-wrap: pretty;
+}
+
+td.message {
+    padding: 3px;
+}
+
+td.time {
+    padding: 5px;
 }
 
 a {
