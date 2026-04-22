@@ -1,6 +1,7 @@
 <html>
     <head>
         <Title>Legend Parse</Title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css')}}" />
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" />
     </head>
     <body>
@@ -25,9 +26,9 @@
                 <td>{{data.message}}</td>
                 <td>{{data.date_created}}</td>
                 <td>{{data.last_updated}}</td>
-                <td><a href="/slicer/{{data.id}}"><button type="button">Slice</button></a></td>
-                <td><a href="/update/{{data.id}}"><button type="button">Update</button></a></td>
-                <td><a href="/delete/{{data.id}}"><button type="button">Delete</button></a></td>
+                <td><a href="/slicer/{{data.id}}"><button type="button" class="btn btn-outline-warning btn-sm">Slice</button></a></td>
+                <td><a href="/update/{{data.id}}"><button type="button" class="btn btn-outline-info btn-sm">Update</button></a></td>
+                <td><a href="/delete/{{data.id}}"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a></td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -51,8 +52,8 @@
                 <td>{{data.field_name}}</td>
                 <td>{{data.field_description}}</td>
                 <td>{{data.field_length}}</td>
-                <td><a href="/update/{{data.id}}"><button type="button">Update</button></a></td>
-                <td><a href="/delete/{{data.id}}"><button type="button">Delete</button></a></td>
+                <td><a href="/update/{{data.id}}"><button type="button" class="btn btn-outline-info btn-sm">Update</button></a></td>
+                <td><a href="/delete/{{data.id}}"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a></td>
                 </tr>
             {% endfor %}
             </tbody>

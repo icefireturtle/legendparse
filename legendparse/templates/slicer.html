@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Slicer</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css')}}" />
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" />
     </head>
     <body>
@@ -13,7 +14,7 @@
             </div>
             <div align="center">
             <h2>Sliced Message ID: {{message.id}}</h2>
-            <h3>{{message.message}}</h3>
+            <h3 class="message">{{message.message}}</h3>
             <h3>Record Type: {{record_type}}</h3>
             <table>
                 <thead>

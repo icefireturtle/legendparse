@@ -10,6 +10,10 @@ h3 {
     color: #FFFFFF;
 }
 
+h3.message {
+    color: #8cecf3;
+}
+
 table {
     border-width: 1px;
     border-style: solid;
@@ -18,7 +22,7 @@ table {
 }
 
 th {
-    color: #FFF8EE;
+    color: #fdc16d;
     border-width: 1px;
     border-style: solid;
     border-color: #E8FBFF;

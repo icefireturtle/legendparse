@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Parser</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css')}}" />
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" />
     </head>
     <body>
@@ -26,7 +27,7 @@
                                 {% endfor %}
                             </select></td>
                             <td><input type="textarea" name="message" placeholder="Insert message here..."></td>
-                            <td><button type="submit">Add</button></td>
+                            <td><button type="submit" class="btn btn-outline-success btn-sm">Add</button></td>
                         </tbody>
                     </table>
                 </form>
@@ -39,7 +40,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input type="text" name="recordType" placeholder="Identifier here max 5 characters" maxlength="5"></td>
+                                <td><input type="text" name="recordType" placeholder="MAX 5 Characters" maxlength="5"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -55,13 +56,13 @@
                                 <td><input type="text" name="fieldName" id="fieldName1" placeholder="Field Name" required></td>
                                 <td><input type="text" name="fieldLength" id="fieldLength1" placeholder="String Length" required></td>
                                 <td><input type="text" name="fieldDesc" id="fieldDesc1" placeholder="Description"></td>
-                                <td><button class="removeField">Remove</button></td>
+                                <td><button id="removeField" class="btn btn-outline-danger btn-sm">Remove</button></td>
                             </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td rowspan="3" colspan="3" style="vertical-align: middle;" align="center"><button id="addFields">Add Field</button>
-                                    <button type="submit">Create Message Parameters</button></td>
+                                    <td colspan="4" style="vertical-align: middle;" align="center"><button id="addFields" class="btn btn-outline-info">Add Field</button>
+                                    <button type="submit" class="btn btn-outline-success">Create Message Parameters</button></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -112,7 +113,7 @@
 
             var removeButton = document.createElement('button');
             removeButton.textContent = 'Remove';
-            removeButton.classList.add('removeField');
+            removeButton.id.add('removeField');
             removeButton.addEventListener('click', function(event) {
                 event.preventDefault();
                 event.currentTarget.parentElement.remove();
