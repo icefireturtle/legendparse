@@ -90,8 +90,10 @@ def record():
 @app.route('/slicer/<int:id>')
 def sliced(id):
     message = Message.query.get_or_404(id)
+    record_type = message.record_type
+    records = Record.query.filter(Record.record_type==record_type)
     slice = slicer(message.message)
-    return render_template('slicer.html', message=message, slice=slice)
+    return render_template('slicer.html', message=message, slice=slice, records=records, record_type=record_type)
     
 @app.route('/delete/<int:id>')
 def delete_message(id):

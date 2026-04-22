@@ -13,7 +13,23 @@
             </div>
             <div align="center">
             <h2>Sliced Message ID: {{message.id}}</h2>
-            <p>{{slice}}</p>
+            <h3>Record Type: {{record_type}}</h3>
+            <table>
+                <thead>
+                    <th>Field Name</th>
+                    <th>Field Description</th>
+                    <th>Message Value</th>
+                </thead>
+                <tbody>
+            {% for data in records %}
+                    <tr>
+                    <td>{{data.field_name}}</td>
+                    <td>{{data.field_description}}</td>
+                    <td>{{slice}}</td>
+                    </tr>
+            {% endfor %}
+            </tbody>
+            </table>
             </div>
         </div>
     </body>
