@@ -16,18 +16,24 @@
                 <h2>Add Message</h2> 
                 <form action="/add_message" method="POST">
                     <table>
+                        <colgroup>
+                            <col />
+                            <col style="width: 450px;" />
+                        </colgroup>
                         <thead>
                             <th>Record Type</th>
                             <th colspan="2">Message</th>
                         </thead>
                         <tbody>
-                            <td><select id="mRecordType" name="mRecordType">
-                                {% for data in record_types %}
-                                <option>{{data.record_type}}</option>
-                                {% endfor %}
-                            </select></td>
-                            <td><input type="textarea" name="message" placeholder="Insert message here..."></td>
-                            <td><button type="submit" class="btn btn-outline-success btn-sm">Add</button></td>
+                            <tr>
+                                <td><select id="mRecordType" name="mRecordType">
+                                    {% for data in record_types %}
+                                    <option>{{data.record_type}}</option>
+                                    {% endfor %}
+                                </select></td>
+                                <td style="line-height: 25px;"><textarea name="message" class="message" placeholder="Insert message here..."></textarea></td>
+                                <td><button type="submit" class="btn btn-outline-success">Add</button></td>
+                            </tr>
                         </tbody>
                     </table>
                 </form>

@@ -42,8 +42,8 @@ td {
     max-width: 350px;
 }
 
-td.message {
-    padding: 3px;
+textarea.message {
+    width: 100%;
 }
 
 td.time {
