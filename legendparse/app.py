@@ -102,6 +102,14 @@ def delete_message(id):
     db.session.commit()
     return redirect('/')
 
+@app.route('/delete/<string:record_type>/<int:field_id>')
+def record_field_delete(record_type, field_id):
+    record_field = Record.query.filter_by(record_type=record_type, field_id=field_id).first()
+    print(record_field)
+    db.session.delete(record_field)
+    db.session.commit()
+    return redirect('/')
+
 @app.route('/update/<int:id>')
 def message_update(id):
     message_id = Message.query.get_or_404(id)
@@ -120,6 +128,11 @@ def update_message(id):
         return redirect('/')
     else:
         return redirect('/')
+    
+@app.route('/update/<string:record_type>/<int:field_id>')
+def record_field_update(record_type, field_id):
+    record = Record.query.filter_by(record_type=record_type, field_id=field_id).first()
+    return render_template('update.html', record=record, record_type=record.record_type, field_id=record.field_id)
 
 if __name__ == '__main__':
     with app.app_context():
