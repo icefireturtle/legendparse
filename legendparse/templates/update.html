@@ -13,16 +13,32 @@
                 </nav>
             </div>
             <div align="center">
-                <h2>Update Message</h2>
+                <h2>Update Stored Message</h2>
+                <h3>Updating Message: {{id}}</h3>
+                <h3>Original Message: {{message}}</h3>
                 <form action="/update/{{id}}" method="POST">
-                    <h3>Updating Message {{id}}</h3>
-                    <br />
-                    <label>Record Type:</label>
-                    <input type="textarea" name="record_type" value="{{record_type}}" maxlength=5>
-                    <br />
-                    <label>Message:</label>
-                    <input type="textarea" name="message" value="{{message}}">
-                    <button type="submit" class="btn btn-outline-success btn md">Update</button>
+                    <table>
+                        <colgroup>
+                            <col />
+                            <col style="width: 450px;" />
+                        </colgroup>
+                        <thead>
+                            <th>Record Type</th>
+                            <th>Message</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><select id="mRecordType" name="mRecordType">
+                                    <option>{{record_type}}</option>
+                                    {% for data in record_types %}
+                                    <option>{{data}}</option>
+                                    {% endfor %}
+                                </select></td>
+                                <td style="line-height: 25px;"><textarea name="message" class="message">{{message}}</textarea></td>
+                                <td><button type="submit" class="btn btn-outline-success btn md">Update</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </form>
             </div>
         </div>

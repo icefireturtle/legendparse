@@ -105,13 +105,14 @@ def delete_message(id):
 @app.route('/update/<int:id>')
 def message_update(id):
     message_id = Message.query.get_or_404(id)
-    return render_template('update.html', message=message_id.message, id=message_id.id, record_type=message_id.record_type)
+    record_types = [row[0] for row in db.session.query(Record.record_type).filter(Record.record_type != message_id.record_type).distinct()]
+    return render_template('update.html', message=message_id.message, id=message_id.id, record_type=message_id.record_type, record_types=record_types)
 
 @app.route('/update/<int:id>', methods=["POST"])
 def update_message(id):
     update_time = datetime.now()
     new_message = request.form.get("message")
-    record_type = request.form.get("record_type")
+    record_type = request.form.get("mRecordType")
     
     if new_message is not None and record_type is not None:
         db.session.bulk_update_mappings(Message, [{'id': id, 'record_type': record_type, 'message': new_message, 'last_updated': update_time}])
