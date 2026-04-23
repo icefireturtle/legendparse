@@ -129,10 +129,23 @@ def update_message(id):
     else:
         return redirect('/')
     
-@app.route('/update/<string:record_type>/<int:field_id>')
+@app.route('/update_field/<string:record_type>/<int:field_id>')
 def record_field_update(record_type, field_id):
     record = Record.query.filter_by(record_type=record_type, field_id=field_id).first()
-    return render_template('update.html', record=record, record_type=record.record_type, field_id=record.field_id)
+    return render_template('update_field.html', record=record, record_type=record.record_type, field_id=record.field_id)
+
+@app.route('/update_field/<string:record_type>/<int:field_id>', methods=["POST"])
+def update_record_field(record_type, field_id):
+    field_name = request.form.get("fieldName")
+    field_description = request.form.get("fieldDesc")
+    field_length = request.form.get("fieldLength")
+
+    if field_name is not None and field_length is not None:
+        db.session.bulk_update_mappings(Record, [{'record_type': record_type, 'field_id': field_id, 'field_name': field_name, 'field_description': field_description, 'field_length': field_length}])
+        db.session.commit()
+        return redirect('/')
+    else:
+        return redirect('/')
 
 if __name__ == '__main__':
     with app.app_context():
