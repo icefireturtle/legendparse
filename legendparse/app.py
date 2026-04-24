@@ -109,8 +109,6 @@ def record_field_delete(record_type, field_id):
 
     remaining = Record.query.filter_by(record_type=record_type).all()
     
-    print(len(remaining))
-    print(remaining)
     if len(remaining) > 0:
         for record in remaining:
             if record.field_id > field_id:
