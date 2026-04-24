@@ -108,6 +108,16 @@ def record_field_delete(record_type, field_id):
     print(record_field)
     db.session.delete(record_field)
     db.session.commit()
+
+    remaining = Record.query.filter_by(record_type=record_type, field_id=field_id).all()
+    for record in remaining:
+        print(record)
+        print(record.field_id)
+        if record.field_id > field_id:
+            new_id = record.field_id - 1
+            db.session.bulk_update_mappings(Record, [{'record_type': record_type, 'field_id': new_id}])
+    db.session.commit()
+
     return redirect('/')
 
 @app.route('/update/<int:id>')
