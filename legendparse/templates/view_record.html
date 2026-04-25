@@ -25,7 +25,7 @@
                             {% set cdx = loop.index0 %}   
                             {% set linear = rdx * row|length + cdx %}
                                 <td>
-                                {{records[linear] if linear < records|length else ''}}
+                                {{records[linear] if linear < records|length else '&nbsp;'|safe }}
                                 </td>
                             {% endfor %}
                         </tr>
