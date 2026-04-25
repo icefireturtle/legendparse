@@ -182,6 +182,11 @@ def view_record():
 
     return render_template('view_record.html', records=records, table=table)
 
+@app.route('/view_record/<string:record_type>')
+def viewing_record(record_type):
+    fields = Record.query.filter(Record.record_type==record_type)
+    return render_template('view_record.html', fields=fields, record=record_type)
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

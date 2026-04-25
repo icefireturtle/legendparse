@@ -17,7 +17,7 @@
                     <h2>Viewing Record: {{record}}</h2>
                     {% else %} 
                     <h2>Please select record to view</h2>
-                    <table>
+                    <table width='100%' height='90%'>
                         {% for row in table %}  
                         {% set rdx = loop.index0 %}                    
                         <tr>
@@ -37,7 +37,8 @@
                     </table>
                     {% endif %}
                     <br /><br />
-                    <table>
+                    {% if record %}
+                    <table width='100%'>
                         <thead>
                             <th>Field ID</th>
                             <th>Field Name</th>
@@ -45,23 +46,29 @@
                             <th>Field Length</th>
                         </thead>
                         <tbody>
-                            {% if record %}
-                            {% for field in record %}
+                            {% for field in fields %}
                             <tr>
                                 <td>{{field.field_id}}</td>
                                 <td>{{field.field_name}}</td>
                                 <td>{{field.field_description}}</td>
                                 <td>{{field.field_length}}</td>
                             {% endfor %}
-                            {% else %}
-                                <td>No Data</td>
-                                <td>No Data</td>
-                                <td>No Data</td>
-                                <td>No Data</td>
                             </tr>
-                            {% endif %}
                         </tbody>
                     </table>
+                    <br /><br />
+                    <table width='100%'>
+                        <tbody>
+                            <tr>
+                                <td colspan="4">
+                                <a href="/view_record">
+                                <button class="btn btn-outline-danger">Select Another Record</button>
+                                </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {% endif %}
                 </div>
             </div>
         </div>

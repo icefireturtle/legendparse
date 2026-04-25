@@ -52,9 +52,15 @@ td.time {
 
 a {
     color: lightgreen;
+    width: 100%;
+    height: 100%;
 }
 
 button {
     height: 100%;
     width: 100%
+}
+
+button.btn-primary {
+    background-color: #151719;
 }
