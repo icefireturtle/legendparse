@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>View Record</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css')}}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" />
+    </head>
+    <body>
+        <div class="containter text-center">
+            <div class="row">
+                <div class="col-2 d-flex justify-content-center">
+                    <nav class="nav flex-column w-100 ms-auto">
+                        {% include 'nav.html' %}
+                    </nav>
+                </div>
+                <div class="col-md-auto" align="center">
+                    {% if record %} 
+                    <h2>Viewing Record: {{record}}</h2>
+                    {% else %} 
+                    <h2>Please select record to view</h2>
+                    <table>
+                        {% for row in table %}  
+                        {% set rdx = loop.index0 %}                    
+                        <tr>
+                            {% for cell in row %}
+                            {% set cdx = loop.index0 %}   
+                            {% set linear = rdx * row|length + cdx %}
+                                <td>
+                                {{records[linear] if linear < records|length else ''}}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                            {% endfor %}
+                    </table>
+                    {% endif %}
+                    <br /><br />
+                    <table>
+                        <thead>
+                            <th>Field ID</th>
+                            <th>Field Name</th>
+                            <th>Field Description</th>
+                            <th>Field Length</th>
+                        </thead>
+                        <tbody>
+                            {% if record %}
+                            {% for field in record %}
+                            <tr>
+                                <td>{{field.field_id}}</td>
+                                <td>{{field.field_name}}</td>
+                                <td>{{field.field_description}}</td>
+                                <td>{{field.field_length}}</td>
+                            {% endfor %}
+                            {% else %}
+                                <td>No Data</td>
+                                <td>No Data</td>
+                                <td>No Data</td>
+                                <td>No Data</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

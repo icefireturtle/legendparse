@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
+from math import ceil
 from slice import slicer
 app = Flask(__name__)
 
@@ -155,6 +156,31 @@ def update_record_field(record_type, field_id):
         return redirect('/')
     else:
         return redirect('/')
+    
+@app.route('/view_record/')
+def view_record():
+    records = [row[0] for row in db.session.query(Record.record_type).distinct()]
+    rows = 3
+    table = [
+        ['Row1Col1', 'Row1Col2', 'Row1Col3'],
+        ['Row2Col1', 'Row2Col2', 'Row2Col3'],
+        ['Row3Col1', 'Row3Col2', 'Row3Col3']
+        ]
+    
+    if len(records) > 9:
+        elements = len(records)
+        need_rows = (elements / 3) - 3
+        if need_rows > 0 and need_rows <= 1:
+            table.append([f'Row{rows+1},Col1', f'Row{rows+1}Col2', f'Row{rows+1}Col3'])
+        elif need_rows > 1:
+            add_rows = ceil(need_rows)
+            for i in range(add_rows):
+                rows += 1
+                table.append([f'Row{rows},Col1', f'Row{rows}Col2', f'Row{rows}Col3'])
+        else:
+            return redirect('/')
+
+    return render_template('view_record.html', records=records, table=table)
 
 if __name__ == '__main__':
     with app.app_context():
