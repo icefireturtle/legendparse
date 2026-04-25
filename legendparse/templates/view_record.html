@@ -25,7 +25,11 @@
                             {% set cdx = loop.index0 %}   
                             {% set linear = rdx * row|length + cdx %}
                                 <td>
+                                <a href="/view_record/{{records[linear] if linear < records|length else '' }}">
+                                <button class="btn btn-primary">
                                 {{records[linear] if linear < records|length else '&nbsp;'|safe }}
+                                </button>
+                                </a>
                                 </td>
                             {% endfor %}
                         </tr>
