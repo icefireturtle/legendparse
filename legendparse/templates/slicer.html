@@ -5,35 +5,36 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" />
     </head>
     <body>
-        <div align="center">
-            <div align="center">
-                <h2>Navigation</h2>
-                <nav>
-                    <a href="/">Home</a>
-                </nav>
-            </div>
-            <div align="center">
-            <h2>Sliced Message ID: {{message.id}}</h2>
-            <h3 class="message">{{message.message}}</h3>
-            <h3>Record Type: {{record_type}}</h3>
-            <table>
-                <thead>
-                    <th>Field Name</th>
-                    <th>Field Description</th>
-                    <th>Field Length</th>
-                    <th>Message Value</th>
-                </thead>
-                <tbody>
-            {% for data in records %}
-                    <tr>
-                    <td>{{data.field_name}}</td>
-                    <td>{{data.field_description}}</td>
-                    <td>{{data.field_length}}</td>
-                    <td>{{slice[loop.index0]}}</td>
-                    </tr>
-            {% endfor %}
-            </tbody>
-            </table>
+        <div class="containter text-center">
+            <div class="row">
+                <div class="col-2 d-flex justify-content-center">
+                    <nav class="nav flex-column w-100 ms-auto">
+                        {% include 'nav.html' %}
+                    </nav>
+                </div>
+                    <div class="col-md-auto" align="center">
+                        <h2>Sliced Message ID: {{message.id}}</h2>
+                        <h3 class="message">{{message.message}}</h3>
+                        <h3>Record Type: {{record_type}}</h3>
+                        <table>
+                            <thead>
+                                <th>Field Name</th>
+                                <th>Field Description</th>
+                                <th>Field Length</th>
+                                <th>Message Value</th>
+                            </thead>
+                            <tbody>
+                        {% for data in records %}
+                                <tr>
+                                <td>{{data.field_name}}</td>
+                                <td>{{data.field_description}}</td>
+                                <td>{{data.field_length}}</td>
+                                <td>{{slice[loop.index0]}}</td>
+                                </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                 </div>
             </div>
         </div>
     </body>

@@ -5,41 +5,42 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" />
     </head>
     <body>
-        <div align="center">
-            <div align="center">
-                <h2>Navigation</h2>
-                <nav>
-                    <a href="/">Home</a>
-                </nav>
-            </div>
-            <div align="center">
-                <h2>Update Stored Message</h2>
-                <h3>Updating Message: {{id}}</h3>
-                <h3>Original Message: {{message}}</h3>
-                <form action="/update/{{id}}" method="POST">
-                    <table>
-                        <colgroup>
-                            <col />
-                            <col style="width: 450px;" />
-                        </colgroup>
-                        <thead>
-                            <th>Record Type</th>
-                            <th>Message</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><select id="mRecordType" name="mRecordType">
-                                    <option>{{record_type}}</option>
-                                    {% for data in record_types %}
-                                    <option>{{data}}</option>
-                                    {% endfor %}
-                                </select></td>
-                                <td style="line-height: 25px;"><textarea name="message" class="message">{{message}}</textarea></td>
-                                <td><button type="submit" class="btn btn-outline-success btn md">Update</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
+        <div class="containter text-center">
+            <div class="row">
+                <div class="col-2 d-flex justify-content-center">
+                    <nav class="nav flex-column w-100 ms-auto">
+                        {% include 'nav.html' %}
+                    </nav>
+                </div>
+                <div class="col-md-auto" align="center">
+                    <h2>Update Stored Message</h2>
+                    <h3>Updating Message: {{id}}</h3>
+                    <h3>Original Message: {{message}}</h3>
+                    <form action="/update/{{id}}" method="POST">
+                        <table>
+                            <colgroup>
+                                <col />
+                                <col style="width: 450px;" />
+                            </colgroup>
+                            <thead>
+                                <th>Record Type</th>
+                                <th>Message</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><select id="mRecordType" name="mRecordType">
+                                        <option>{{record_type}}</option>
+                                        {% for data in record_types %}
+                                        <option>{{data}}</option>
+                                        {% endfor %}
+                                    </select></td>
+                                    <td style="line-height: 25px;"><textarea name="message" class="message">{{message}}</textarea></td>
+                                    <td><button type="submit" class="btn btn-outline-info btn md">Update</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
             </div>
         </div>
     </body>
