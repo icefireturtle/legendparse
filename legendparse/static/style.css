@@ -19,7 +19,7 @@ table {
     border-style: solid;
     border-color: #E8FBFF;
     border-collapse: collapse;
-    
+    width: 100%;
 }
 
 th {
