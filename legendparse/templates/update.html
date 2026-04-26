@@ -12,10 +12,10 @@
                         {% include 'nav.html' %}
                     </nav>
                 </div>
-                <div class="col-md-auto" align="center">
+                <div class="col-md-auto">
                     <h2>Update Stored Message</h2>
                     <h3>Updating Message: {{id}}</h3>
-                    <h3>Original Message: {{message}}</h3>
+                    <h3 class="message">Original Message: {{message}}</h3>
                     <form action="/update/{{id}}" method="POST">
                         <table>
                             <colgroup>
@@ -34,7 +34,7 @@
                                         <option>{{data}}</option>
                                         {% endfor %}
                                     </select></td>
-                                    <td style="line-height: 25px;"><textarea name="message" class="message">{{message}}</textarea></td>
+                                    <td style="line-height: 18px;"><textarea name="message" class="message">{{message}}</textarea></td>
                                     <td><button type="submit" class="btn btn-outline-info btn md">Update</button></td>
                                 </tr>
                             </tbody>
