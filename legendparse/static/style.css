@@ -19,6 +19,7 @@ table {
     border-style: solid;
     border-color: #E8FBFF;
     border-collapse: collapse;
+    min-width: 800px;
     width: 100%;
 }
 
@@ -40,6 +41,7 @@ td {
     text-wrap: pretty;
     word-wrap: break-word;
     max-width: 350px;
+    height: 47px;
 }
 
 textarea.message {
@@ -63,4 +65,14 @@ button {
 
 button.btn-primary {
     background-color: #151719;
+}
+
+select {
+    width: 100%;
+    height: 100%;
+}
+
+input {
+    width: 100%;
+    height: 100%;
 }

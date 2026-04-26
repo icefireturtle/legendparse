@@ -12,17 +12,18 @@
                         {% include 'nav.html' %}
                     </nav>
                 </div>
-                <div class="col-md-auto" align="center">
+                <div class="col-md-auto">
                     <h2>Add Message</h2> 
                     <form action="/add_message" method="POST">
-                        <table>
+                        <table style="border-collapse: collapse;">
                             <colgroup>
                                 <col />
                                 <col style="width: 450px;" />
                             </colgroup>
                             <thead>
                                 <th>Record Type</th>
-                                <th colspan="2">Message</th>
+                                <th style="border-right: none;">Message</th>
+                                <th style="border-left: none;"></th>
                             </thead>
                             <tbody>
                                 <tr>
@@ -31,7 +32,7 @@
                                         <option>{{data.record_type}}</option>
                                         {% endfor %}
                                     </select></td>
-                                    <td style="line-height: 25px;"><textarea name="message" class="message" placeholder="Insert message here..."></textarea></td>
+                                    <td style="line-height: 18px;"><textarea name="message" class="message" placeholder="Insert message here..."></textarea></td>
                                     <td><button type="submit" class="btn btn-outline-success">Add</button></td>
                                 </tr>
                             </tbody>
