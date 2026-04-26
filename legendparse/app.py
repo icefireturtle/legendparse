@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
@@ -102,6 +102,12 @@ def record():
         return redirect('/')
     else:
         return redirect('/')
+    
+#record api
+@app.route('/api/<string:record_type>', methods=['GET'])
+def get_record(record_type):
+    fields = Record.query.filter(Record.record_type==record_type)
+    return jsonify([{'field_id': field.field_id, 'field_name': field.field_name} for field in fields])
 
 #slicer
 @app.route('/slicer/<int:id>')
