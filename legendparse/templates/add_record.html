@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>Parser</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css')}}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" />
+    </head>
+    <body>
+        <div class="containter text-center">
+            <div class="row">
+                <div class="col-2 d-flex justify-content-center">
+                    <nav class="nav flex-column w-100 ms-auto">
+                        {% include 'nav.html' %}
+                    </nav>
+                </div>
+                <div class="col-md-auto" align="center">
+                    <h2>Create Parser Parameters for Message Record</h2>
+                    <form action="/add_record" method="POST" id="parameters">
+                        <table>
+                            <thead>
+                                <th>Record Type</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" name="recordType" placeholder="MAX 5 Characters" maxlength="5" required></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                            <table id="paramsContainer" width="100%">
+                            <thead>
+                                <th>Field Name</th>
+                                <th>Field Length</th>
+                                <th colspan="2">Field Description</th>
+                            </thead>
+                            <tbody>
+                                <tr class="paramsWrapper">
+                                    <td><input type="text" name="fieldName" id="fieldName1" placeholder="Field Name" required></td>
+                                    <td><input type="text" name="fieldLength" id="fieldLength1" placeholder="String Length" required></td>
+                                    <td><input type="text" name="fieldDesc" id="fieldDesc1" placeholder="Description"></td>
+                                    <td><button class="removeField btn btn-outline-danger btn-sm">Remove</button></td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" style="vertical-align: middle;" align="center"><button id="addFields" class="btn btn-outline-info">Add Field</button>
+                                        <button type="submit" class="btn btn-outline-success">Create Message Parameters</button></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <script src="{{ url_for('static', filename='add_fields.js')}}"></script>
+    </body>
+</html>

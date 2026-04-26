@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Parser</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css')}}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" />
+    </head>
+    <body>
+        <div class="containter text-center">
+            <div class="row">
+                <div class="col-2 d-flex justify-content-center">
+                    <nav class="nav flex-column w-100 ms-auto">
+                        {% include 'nav.html' %}
+                    </nav>
+                </div>
+                <div class="col-md-auto" align="center">
+                    <h2>Add Message</h2> 
+                    <form action="/add_message" method="POST">
+                        <table width="100%">
+                            <colgroup>
+                                <col />
+                                <col style="width: 450px;" />
+                            </colgroup>
+                            <thead>
+                                <th>Record Type</th>
+                                <th colspan="2">Message</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><select id="mRecordType" name="mRecordType">
+                                        {% for data in record_types %}
+                                        <option>{{data.record_type}}</option>
+                                        {% endfor %}
+                                    </select></td>
+                                    <td style="line-height: 25px;"><textarea name="message" class="message" placeholder="Insert message here..."></textarea></td>
+                                    <td><button type="submit" class="btn btn-outline-success">Add</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

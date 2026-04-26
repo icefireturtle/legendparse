@@ -51,6 +51,11 @@ def parser():
     record_types = Record.query.with_entities(Record.record_type).distinct()
     return render_template('parser.html', record_types=record_types)
 
+@app.route('/add_message')
+def add_message():
+    record_types = Record.query.with_entities(Record.record_type).distinct()
+    return render_template('add_message.html', record_types=record_types)
+
 @app.route('/add_message', methods=["POST"])
 def message():
     message = request.form.get("message")
@@ -63,6 +68,11 @@ def message():
         return redirect('/')
     else:
         return redirect('/')
+    
+@app.route('/add_record')
+def add_record():
+    record_types = Record.query.with_entities(Record.record_type).distinct()
+    return render_template('add_record.html', record_types=record_types)
 
 @app.route('/add_record', methods=["POST"])
 def record():
