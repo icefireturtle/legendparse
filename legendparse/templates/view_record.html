@@ -44,6 +44,7 @@
                             <th>Field Name</th>
                             <th>Field Description</th>
                             <th>Field Length</th>
+                            <th colspan="2">Actions</th>
                         </thead>
                         <tbody>
                             {% for field in fields %}
@@ -52,6 +53,8 @@
                                 <td>{{field.field_name}}</td>
                                 <td>{{field.field_description}}</td>
                                 <td>{{field.field_length}}</td>
+                                <td><a href="/update_field/{{field.record_type}}/{{field.field_id}}"><button type="button" class="btn btn-outline-info btn-sm">Update</button></a></td>
+                                <td><a href="/delete/{{field.record_type}}/{{field.field_id}}"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a></td>
                             {% endfor %}
                             </tr>
                         </tbody>
@@ -62,8 +65,26 @@
                             <tr>
                                 <td colspan="4">
                                 <a href="/view_record">
-                                <button class="btn btn-outline-danger">Select Another Record</button>
+                                <button class="btn btn-outline-info">Add Fields to Record</button>
                                 </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                <a href="/view_record">
+                                <button class="btn btn-outline-warning">Select Another Record</button>
+                                </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                <button class="btn btn-outline-danger" command="show-modal" commandfor="delete-warning">Delete Entire Record</button>
+                                <dialog id="delete-warning">
+                                    <p>WARNING: This will DELETE the ENTIRE record and all associated fields!</p>
+                                    <p>Are you sure you want to continue?</p>
+                                    <a href="/delete/{{fields[0].record_type}}"><button type="button" class="btn btn-danger" commandfor="delete-warning" command="close">Delete</button></a>
+                                    <button class="btn btn-primary" commandfor="delete-warning" command="close">Close</button>
+                                </dialog>
                                 </td>
                             </tr>
                         </tbody>

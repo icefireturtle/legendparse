@@ -40,17 +40,21 @@ class Record(db.Model):
         return f"Record Type: {self.record_type}, Field: {self.field_name}, Field Length: {self.field_length}"
     
 #render functions
+
+#index
 @app.route('/')
 def index():
     messages = Message.query.all()
     records = Record.query.all()
     return render_template('index.html', messages=messages, records=records)
 
+#parser
 @app.route('/parser')
 def parser():
     record_types = Record.query.with_entities(Record.record_type).distinct()
     return render_template('parser.html', record_types=record_types)
 
+#add messages functions
 @app.route('/add_message')
 def add_message():
     record_types = Record.query.with_entities(Record.record_type).distinct()
@@ -68,7 +72,8 @@ def message():
         return redirect('/')
     else:
         return redirect('/')
-    
+
+#add records functions
 @app.route('/add_record')
 def add_record():
     record_types = Record.query.with_entities(Record.record_type).distinct()
@@ -98,6 +103,7 @@ def record():
     else:
         return redirect('/')
 
+#slicer
 @app.route('/slicer/<int:id>')
 def sliced(id):
     message = Message.query.get_or_404(id)
@@ -105,7 +111,8 @@ def sliced(id):
     records = Record.query.filter(Record.record_type==record_type)
     slice = slicer(message.message, records)
     return render_template('slicer.html', message=message, slice=slice, records=records, record_type=record_type)
-    
+
+#delete functions
 @app.route('/delete/<int:id>')
 def delete_message(id):
     message = Message.query.get_or_404(id)
@@ -130,6 +137,13 @@ def record_field_delete(record_type, field_id):
     db.session.commit()
     return redirect('/')
 
+@app.route('/delete/<string:record_type>')
+def delete_record(record_type):
+    db.session.query(Record).filter(Record.record_type==record_type).delete(synchronize_session='fetch')
+    db.session.commit()
+    return redirect('/')
+
+#update functions
 @app.route('/update/<int:id>')
 def message_update(id):
     message_id = Message.query.get_or_404(id)
@@ -148,7 +162,7 @@ def update_message(id):
         return redirect('/')
     else:
         return redirect('/')
-    
+
 @app.route('/update_field/<string:record_type>/<int:field_id>')
 def record_field_update(record_type, field_id):
     record = Record.query.filter_by(record_type=record_type, field_id=field_id).first()
@@ -166,7 +180,8 @@ def update_record_field(record_type, field_id):
         return redirect('/')
     else:
         return redirect('/')
-    
+
+#view record
 @app.route('/view_record/')
 def view_record():
     records = [row[0] for row in db.session.query(Record.record_type).distinct()]
