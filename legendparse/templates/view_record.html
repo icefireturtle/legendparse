@@ -59,13 +59,16 @@
                             </tr>
                         </tbody>
                     </table>
-                    <br /><br />
+                    <br />
+                    <div id="newFormEntry">
+                    </div>
+                    <br />
                     <table>
                         <tbody>
                             <tr>
                                 <td colspan="4">
                                 <a href="/view_record">
-                                <button class="btn btn-outline-info">Add Fields to Record</button>
+                                <button id="addForm" class="btn btn-outline-info">Add Fields to Record</button>
                                 </a>
                                 </td>
                             </tr>
@@ -89,9 +92,10 @@
                             </tr>
                         </tbody>
                     </table>
-                    {% endif %}
                 </div>
             </div>
         </div>
+        <script src="{{ url_for('static', filename='append_fields.js')}}"></script>
+        {% endif %}
     </body>
 </html>
