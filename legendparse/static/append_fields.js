@@ -31,7 +31,7 @@ const newFormEntry = document.getElementById('newFormEntry');
 
 const form = document.createElement('form');
 form.className = 'newForm';
-form.action = '/append_fields';
+form.action = `/append_fields/${record}`;
 form.method = 'POST';
 
 const newTable = document.createElement('table');
@@ -117,6 +117,7 @@ newTable.appendChild(newTableHead);
 newTable.appendChild(row);
 newTable.appendChild(extendAppendRow);
 newTable.appendChild(extendAppendCol);
-newFormEntry.appendChild(newTable);
+form.appendChild(newTable);
+newFormEntry.appendChild(form);
 
 });

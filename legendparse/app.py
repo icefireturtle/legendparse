@@ -218,6 +218,31 @@ def viewing_record(record_type):
     fields = Record.query.filter(Record.record_type==record_type)
     return render_template('view_record.html', fields=fields, record=record_type)
 
+#append field view record
+@app.route('/append_fields/<string:record_type>', methods=["POST"])
+def append_fields_record(record_type):
+    field_name = request.form.getlist("fieldName")
+    field_description = request.form.getlist("fieldDesc")
+    field_length = request.form.getlist("fieldLength")
+    current_record = [row[0] for row in db.session.query(Record.record_type).filter(Record.record_type==record_type)]
+    current_length = len(current_record)
+    print(f"current length is {current_length}")
+
+    if record_type is not None and field_name is not None and field_length is not None:
+        for i in range(len(field_name)):
+            append_id = current_length
+            field_id = append_id + 1
+            n = field_name[i]
+            d = field_description[i]
+            l = field_length[i]
+            r = Record(record_type=record_type, field_id=field_id, field_name=n, field_description=d, field_length=l)
+            db.session.add(r)
+
+        db.session.commit()
+        return redirect('/view_record')
+    else:
+        return redirect('/view_record')
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
