@@ -225,13 +225,11 @@ def append_fields_record(record_type):
     field_description = request.form.getlist("fieldDesc")
     field_length = request.form.getlist("fieldLength")
     current_record = [row[0] for row in db.session.query(Record.record_type).filter(Record.record_type==record_type)]
-    current_length = len(current_record)
-    print(f"current length is {current_length}")
+    field_id = len(current_record)
 
     if record_type is not None and field_name is not None and field_length is not None:
         for i in range(len(field_name)):
-            append_id = current_length
-            field_id = append_id + 1
+            field_id += 1
             n = field_name[i]
             d = field_description[i]
             l = field_length[i]
