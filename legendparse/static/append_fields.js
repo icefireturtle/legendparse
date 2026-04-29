@@ -22,102 +22,119 @@ fetchAndCount(apiURL)
     })
     .catch(err => console.error(err));
 
-document.getElementById('addForm').addEventListener('click', function(event){
-event.preventDefault();
-elementCount+=1;
-console.log(elementCount);
+function createForm() {
+    const newFormEntry = document.getElementById('newFormEntry');
 
-const newFormEntry = document.getElementById('newFormEntry');
+    const form = document.createElement('form');
+    form.className = 'newForm';
+    form.action = `/append_fields/${record}`;
+    form.method = 'POST';
 
-const form = document.createElement('form');
-form.className = 'newForm';
-form.action = `/append_fields/${record}`;
-form.method = 'POST';
+    const newTable = document.createElement('table');
+    newTable.className = 'newTable';
 
-const newTable = document.createElement('table');
+    const newTableHead = document.createElement('thead');
+    const newTableBody = document.createElement('tbody')
+    newTableBody.id = 'addBody';
 
-const newTableHead = document.createElement('thead');
+    const newTableHeaderFName = document.createElement('th');
+    newTableHeaderFName.textContent ='Field Name';
 
-newTable.append(newTableHead);
+    const newTableHeaderFDesc = document.createElement('th');
+    newTableHeaderFDesc.textContent = 'Field Description';
 
-const newTableHeaderFName = document.createElement('th');
-newTableHeaderFName.textContent ='Field Name';
+    const newTableHeaderFLen = document.createElement('th');
+    newTableHeaderFLen.textContent ='Field Length';
 
-const newTableHeaderFDesc = document.createElement('th');
-newTableHeaderFDesc.textContent = 'Field Description';
+    newTable.append(newTableHead);
+    newTableHead.append(newTableHeaderFName);
+    newTableHead.append(newTableHeaderFDesc);
+    newTableHead.append(newTableHeaderFLen);
+    newTable.append(newTableBody);
 
-const newTableHeaderFLen = document.createElement('th');
-newTableHeaderFLen.textContent ='Field Length';
+    var extendAppendRow = document.createElement('tr');
+    extendAppendRow.className = 'appendWrapper';
+    extendAppendRow.id = 'appendWrapper';
+    var extendAppendCol = document.createElement('td');
 
-newTableHead.append(newTableHeaderFName);
-newTableHead.append(newTableHeaderFDesc);
-newTableHead.append(newTableHeaderFLen);
+    extendAppendCol.colSpan = '4';
 
-const row = document.createElement('tr');
-row.className = 'addFieldsWrapper';
+    var appendButton = document.createElement('button');
+    appendButton.textContent = 'Append Fields';
+    appendButton.classList.add('appendField', 'btn', 'btn-outline-success', 'btn-sm');
+    appendButton.type = 'submit';
 
-var newFieldNameCell = document.createElement('td');
-var newFieldDescCell = document.createElement('td');
-var newFieldLengthCell = document.createElement('td');
+    extendAppendCol.appendChild(appendButton);
+    newTable.appendChild(extendAppendRow);
+    newTable.appendChild(extendAppendCol);
+    form.appendChild(newTable);
+    newFormEntry.appendChild(form);
+}
 
-var newFieldNameInput = document.createElement('input');
-var newFieldDescInput = document.createElement('input');
-var newFieldLengthInput = document.createElement('input');
+function addRow() {
+    const row = document.createElement('tr');
+    row.className = 'addFieldsWrapper';
 
-newFieldNameInput.type = 'text';
-newFieldNameInput.name = 'fieldName';
-newFieldNameInput.id = 'fieldName' + (elementCount);
-newFieldNameInput.placeholder = 'Field Name ' + (elementCount);
+    var newFieldNameCell = document.createElement('td');
+    var newFieldDescCell = document.createElement('td');
+    var newFieldLengthCell = document.createElement('td');
 
-newFieldDescInput.type = 'text';
-newFieldDescInput.name = 'fieldDesc';
-newFieldDescInput.id = 'fieldDesc' + (elementCount);
-newFieldDescInput.placeholder = 'Field Description ' + (elementCount);
+    var newFieldNameInput = document.createElement('input');
+    var newFieldDescInput = document.createElement('input');
+    var newFieldLengthInput = document.createElement('input');
 
-newFieldLengthInput.type = 'text';
-newFieldLengthInput.name = 'fieldLength';
-newFieldLengthInput.id = 'fieldLength' + (elementCount);
-newFieldLengthInput.placeholder = 'Field Length ' + (elementCount);
+    newFieldNameInput.type = 'text';
+    newFieldNameInput.name = 'fieldName';
+    newFieldNameInput.id = 'fieldName' + (elementCount);
+    newFieldNameInput.placeholder = 'Field Name ' + (elementCount);
 
-row.append(newFieldNameCell);
-row.append(newFieldDescCell);
-row.append(newFieldLengthCell);
+    newFieldDescInput.type = 'text';
+    newFieldDescInput.name = 'fieldDesc';
+    newFieldDescInput.id = 'fieldDesc' + (elementCount);
+    newFieldDescInput.placeholder = 'Field Description ' + (elementCount);
 
-newFieldNameCell.appendChild(newFieldNameInput);
-newFieldDescCell.appendChild(newFieldDescInput);
-newFieldLengthCell.appendChild(newFieldLengthInput);
+    newFieldLengthInput.type = 'text';
+    newFieldLengthInput.name = 'fieldLength';
+    newFieldLengthInput.id = 'fieldLength' + (elementCount);
+    newFieldLengthInput.placeholder = 'Field Length ' + (elementCount);
 
-var removeButton = document.createElement('button');
-removeButton.textContent = 'Remove';
-removeButton.classList.add('removeField','btn','btn-outline-danger','btn-sm');
-removeButton.addEventListener('click', function(event) {
-    event.preventDefault();
-    event.currentTarget.parentElement.remove(); 
-    console.log(event.currentTarget.parentElement, event.currentTarget.closest('.addFieldsWrapper'));
-    elementCount-=1;
-});
+    row.append(newFieldNameCell);
+    row.append(newFieldDescCell);
+    row.append(newFieldLengthCell);
+
+    newFieldNameCell.appendChild(newFieldNameInput);
+    newFieldDescCell.appendChild(newFieldDescInput);
+    newFieldLengthCell.appendChild(newFieldLengthInput);
+
+    var removeButton = document.createElement('button');
+    removeButton.textContent = 'Remove';
+    removeButton.classList.add('removeField','btn','btn-outline-danger','btn-sm');
+    removeButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        event.currentTarget.parentElement.remove(); 
+        console.log(event.currentTarget.parentElement, event.currentTarget.closest('.addFieldsWrapper'));
+        elementCount-=1;
+    });
 
 row.appendChild(removeButton);
 
-var extendAppendRow = document.createElement('tr');
-extendAppendRow.className = 'appendWrapper';
-extendAppendRow.id = 'appendWrapper';
-var extendAppendCol = document.createElement('td');
+const table = document.getElementById('addBody');
+table.appendChild(row);
+}
 
-extendAppendCol.colSpan = '4';
+document.getElementById('addForm').addEventListener('click', function(event){
+event.preventDefault();
+let exists = document.getElementsByClassName('newForm');
 
-var appendButton = document.createElement('button');
-appendButton.textContent = 'Append Fields';
-appendButton.classList.add('appendField', 'btn', 'btn-outline-success', 'btn-sm');
-appendButton.type = 'submit';
+console.log(exists);
 
-extendAppendCol.appendChild(appendButton);
-
-newTable.appendChild(newTableHead);
-newTable.appendChild(row);
-newTable.appendChild(extendAppendRow);
-newTable.appendChild(extendAppendCol);
-form.appendChild(newTable);
-newFormEntry.appendChild(form);
-
+if ((exists.length) === 0) {
+    elementCount+=1;
+    createForm();
+    addRow();
+    } else {
+    elementCount+=1;
+    addRow();
+    console.log(elementCount);
+    }
 });
