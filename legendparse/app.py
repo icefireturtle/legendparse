@@ -9,6 +9,7 @@ app = Flask(__name__)
 #database items
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = False
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -35,6 +36,8 @@ class Record(db.Model):
     field_name = db.Column(db.String(25))
     field_description = db.Column(db.String(75))
     field_length = db.Column(db.Integer)
+    field_start = db.Column(db.Integer)
+    field_end = db.Column(db.Integer)
 
     def __repr__(self):
         return f"Record Type: {self.record_type}, Field: {self.field_name}, Field Length: {self.field_length}"
@@ -234,8 +237,10 @@ def append_fields_record(record_type):
             d = field_description[i]
             l = field_length[i]
             r = Record(record_type=record_type, field_id=field_id, field_name=n, field_description=d, field_length=l)
+            print(r.field_length, type(r.field_length))
             db.session.add(r)
-
+        
+        print(r.field_length, type(r.field_length))
         db.session.commit()
         return redirect(f'/view_record/{record_type}')
     else:
