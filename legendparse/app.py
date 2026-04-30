@@ -237,7 +237,7 @@ def append_fields_record(record_type):
             db.session.add(r)
 
         db.session.commit()
-        return redirect('/view_record')
+        return redirect(f'/view_record/{record_type}')
     else:
         return redirect('/view_record')
 
