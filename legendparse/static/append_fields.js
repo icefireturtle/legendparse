@@ -4,6 +4,7 @@ const [lead, view, record] = getURL.split("/");
 const apiURL = `${basePath}/api/${record}`;
 console.log(apiURL);
 let elementCount = 0;
+let intialCount = 0;
 
 async function fetchAndCount(url) {
     const response = await fetch(url);
@@ -11,9 +12,11 @@ async function fetchAndCount(url) {
     const data = await response.json();
     const rows = Array.isArray(data) ? data : (data.rows ?? []);
     elementCount = rows.length;
+    intialCount = rows.length;
     console.log(data);
     console.log(rows);
-    console.log(elementCount);
+    console.log(`element: ${elementCount}`);
+    console.log(`initial: ${intialCount}`);
     return elementCount;
 }
 
@@ -27,6 +30,7 @@ function createForm() {
 
     const form = document.createElement('form');
     form.className = 'newForm';
+    form.id = 'newForm'
     form.action = `/append_fields/${record}`;
     form.method = 'POST';
 
@@ -109,11 +113,17 @@ function addRow() {
     var removeButton = document.createElement('button');
     removeButton.textContent = 'Remove';
     removeButton.classList.add('removeField','btn','btn-outline-danger','btn-sm');
+    removeButton.id = 'removeButton';
     removeButton.addEventListener('click', function(event) {
         event.preventDefault();
         event.currentTarget.parentElement.remove(); 
         console.log(event.currentTarget.parentElement, event.currentTarget.closest('.addFieldsWrapper'));
         elementCount-=1;
+
+        if (elementCount==intialCount) {
+            document.getElementById('newForm').remove();
+        }
+
     });
 
 row.appendChild(removeButton);
@@ -138,3 +148,5 @@ if ((exists.length) === 0) {
     console.log(elementCount);
     }
 });
+
+
