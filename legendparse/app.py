@@ -91,17 +91,33 @@ def record():
 
     if record_type is not None and field_name is not None and field_length is not None:
         if len(field_name) > 1:
+            
+            last_end = 0
+            
             for i in range(len(field_name)):
                 field_id = i + 1
+                if i == 0:
+                    field_start = 1
+                else:
+                    field_start = last_end+1
+                
+                field_end = int(field_start) + int(field_length[i]) - 1
+
                 n = field_name[i]
                 d = field_description[i]
                 l = field_length[i]
-                r = Record(record_type=record_type, field_id=field_id, field_name=n, field_description=d, field_length=l)
+                s = field_start
+                e = field_end
+
+                last_end += int(l)
+
+                r = Record(record_type=record_type, field_id=field_id, field_name=n, field_description=d, field_length=l, field_start=s, field_end=e)
                 db.session.add(r)
         else:
-            r = Record(record_type=record_type, field_id=1, field_name=field_name[0], field_description=field_description[0], field_length=field_length[0])
+            r = Record(record_type=record_type, field_id=1, field_name=field_name[0], field_description=field_description[0], field_length=field_length[0], field_start=1, field_end=int(field_length[0]))
             db.session.add(r)
         db.session.commit()
+
         return redirect('/')
     else:
         return redirect('/')
